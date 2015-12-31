@@ -1,31 +1,36 @@
 package com.mattfenlon.osmap;
 
-import android.app.FragmentManager;
-import android.content.DialogInterface;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mattfenlon.osmap.POJO.CircuitItem;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptor;
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptorFactory;
 import uk.co.ordnancesurvey.android.maps.CameraPosition;
 import uk.co.ordnancesurvey.android.maps.GridPoint;
-import uk.co.ordnancesurvey.android.maps.LocationSource;
 import uk.co.ordnancesurvey.android.maps.MapFragment;
 import uk.co.ordnancesurvey.android.maps.MarkerOptions;
 import uk.co.ordnancesurvey.android.maps.OSMap;
@@ -36,6 +41,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -86,6 +92,7 @@ public class MainActivity extends ActionBarActivity {
         private OSMap mMap;
 
         public PlaceholderFragment() {
+
         }
 
         @Override
@@ -137,91 +144,44 @@ public class MainActivity extends ActionBarActivity {
             String locationMessage = "Silverstone innit!";
 
             mMap.addMarker(new MarkerOptions()
-                    .gridPoint(gp)
-                    .snippet(locationMessage)
-                    .icon(icon));
+                                   .gridPoint(gp)
+                                   .snippet(locationMessage)
+                                   .icon(icon));
 
+            try {
 
+                InputStream is = getResources().openRawResource(R.raw.circuits);
 
+                BufferedReader r = new BufferedReader(new InputStreamReader(is));
+                StringBuilder output = new StringBuilder();
+                String line;
+                while ((line = r.readLine()) != null) {
+                    output.append(line);
+                }
 
-            // An ArrayList of places.
-            ArrayList<MarkerOptions> circuits = new ArrayList<>();
+                //output to LogCat
+                Log.i("test", output.toString());
 
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(233225,368797))
-                            .snippet("Anglesey").icon(icon));
+                Gson gson = new Gson();
+                ArrayList<CircuitItem> circuitsArr = gson.fromJson(output.toString(), new TypeToken<List<CircuitItem>>(){}.getType());
 
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(504433,260590))
-                    .snippet("Bedford").icon(icon));
+                int i = 0;
+                for (CircuitItem ci : circuitsArr) {
 
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(485658,394521))
-                    .snippet("Blyton").icon(icon));
+                    mMap.addMarker(new MarkerOptions().gridPoint(new GridPoint(ci.getLat(),ci.getLon())).snippet(ci.getName()).icon(icon));
 
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(529154,380854))
-                    .snippet("Cadwell Park").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(385343,176774))
-                    .snippet("Castle Combe").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(314379,212519))
-                    .snippet("Circuit of Wales").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(428444,506804))
-                    .snippet("Croft").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(354699,679246))
-                    .snippet("East Fortune").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(487429,107392))
-                    .snippet("Goodwood").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(175237,512277))
-                    .snippet("Kirkistown").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(306641,693922))
-                    .snippet("Knockhill").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(295974,171353))
-                    .snippet("Llandow").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(623738,146883))
-                    .snippet("Lydden").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(444951,300297))
-                    .snippet("Mallory Park").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(132017,534151))
-                    .snippet("Nutts Corner").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(503988,503988))
-                    .snippet("Oliver's Mount").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(359035,364675))
-                    .snippet("Oulton Park").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(239752,203307))
-                    .snippet("Pembrey").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(491200,291637))
-                    .snippet("Rockingham").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(496008,260958))
-                    .snippet("Santa Pod").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(600368,289484))
-                    .snippet("Snetterton").icon(icon));
-
-            circuits.add(new MarkerOptions().gridPoint(new GridPoint(427999,145750))
-                    .snippet("Thruxton").icon(icon));
-
-
-            for(int i = 0; i < circuits.size(); i++){
-                mMap.addMarker(circuits.get(i));
+                    i++;
+                }
             }
-
+            catch (IOException e) {
+                //display an error toast message
+                Toast toast = Toast.makeText(getActivity(), "File: not found!", Toast.LENGTH_LONG);
+                toast.show();
+            }
 
             // Set the location and zoom to match.
             Float cameraZoom = 3000.0f;
-            CameraPosition cameraPosition = new CameraPosition(gp,cameraZoom);
+            CameraPosition cameraPosition = new CameraPosition(gp, cameraZoom);
             mMap.moveCamera(cameraPosition, true);  // The true means it animates. Why not? Animation is nice.
 
             /** YOU'VE GONE TOO FAR... */
@@ -232,7 +192,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public boolean onMapClick(GridPoint gridPoint) {
 
-            Log.v(TAG, "Tapped the Map: X: " + Double.toString(gridPoint.x) + ", Y: " +  Double.toString(gridPoint.y));
+            Log.v(TAG, "Tapped the Map: X: " + Double.toString(gridPoint.x) + ", Y: " + Double.toString(gridPoint.y));
 
 
 
