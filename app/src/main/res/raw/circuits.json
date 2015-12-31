@@ -1,0 +1,107 @@
+[
+   {
+      "lat":233225,
+      "lon":368797,
+      "name":"Anglesey"
+   },
+   {
+      "lat":504433,
+      "lon":260590,
+      "name":"Bedford"
+   },
+   {
+      "lat":485658,
+      "lon":394521,
+      "name":"Blyton"
+   },
+   {
+      "lat":529154,
+      "lon":380854,
+      "name":"Cadwell Park"
+   },
+   {
+      "lat":385343,
+      "lon":176774,
+      "name":"Castle Combe"
+   },
+   {
+      "lat":314379,
+      "lon":212519,
+      "name":"Circuit of Wales"
+   },
+   {
+      "lat":428444,
+      "lon":506804,
+      "name":"Croft"
+   },
+   {
+      "lat":354699,
+      "lon":679246,
+      "name":"East Fortune"
+   },
+   {
+      "lat":487429,
+      "lon":107392,
+      "name":"Goodwood"
+   },
+   {
+      "lat":175237,
+      "lon":512277,
+      "name":"Kirkistown"
+   },
+   {
+      "lat":306641,
+      "lon":693922,
+      "name":"Knockhill"
+   },
+   {
+      "lat":295974,
+      "lon":171353,
+      "name":"Llandow"
+   },
+   {
+      "lat":623738,
+      "lon":146883,
+      "name":"Lydden"
+   },
+   {
+      "lat":444951,
+      "lon":300297,
+      "name":"Mallory Park"
+   },
+   {
+      "lat":132017,
+      "lon":534151,
+      "name":"Nutts Corner"
+   },
+   {
+      "lat":359035,
+      "lon":364675,
+      "name":"Oulton Park"
+   },
+   {
+      "lat":239752,
+      "lon":203307,
+      "name":"Pembrey"
+   },
+   {
+      "lat":491200,
+      "lon":291637,
+      "name":"Rockingham"
+   },
+   {
+      "lat":496008,
+      "lon":260958,
+      "name":"Santa Pod"
+   },
+   {
+      "lat":600368,
+      "lon":289484,
+      "name":"Snetterton"
+   },
+   {
+      "lat":427999,
+      "lon":145750,
+      "name":"Thruxton"
+   }
+]
