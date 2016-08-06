@@ -43,3 +43,4 @@ build/
 *.ipr
 *~
 *.swp
+/app/src/main/res/values/osmap-key.xml
