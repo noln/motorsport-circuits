@@ -1,4 +1,4 @@
-package com.mattfenlon.osmap.POJO;
+package com.mattfenlon.motorsportcircuits.POJO;
 
 
 /**

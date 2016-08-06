@@ -1,4 +1,4 @@
-package com.mattfenlon.osmap;
+package com.mattfenlon.motorsportcircuits;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

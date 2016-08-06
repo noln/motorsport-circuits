@@ -1,4 +1,4 @@
-package com.mattfenlon.osmap;
+package com.mattfenlon.motorsportcircuits;
 
 
 import android.graphics.Bitmap;
@@ -17,10 +17,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mattfenlon.osmap.POJO.CircuitItem;
+import com.mattfenlon.motorsportcircuits.POJO.CircuitItem;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -82,9 +81,6 @@ public class MainActivity extends ActionBarActivity {
         // Log tag. Standard.
         private final static String TAG = MainActivity.class.getSimpleName();
 
-        // This is your key. Straight forward, as they only give you one.
-        private final static String OS_API_KEY = "YOUR API KEY GOES HERE";
-
         // Determines if you're using the paid "PRO" version. Of course I'm not. FALSE!
         private final static boolean OS_IS_PRO = false;
 
@@ -115,7 +111,7 @@ public class MainActivity extends ActionBarActivity {
             // This bit looks to be making sure that they don't give you nice things if you're not
             // paying for it... Even though I'm prettu sure that I am already, being a British
             // taxpayer and all. Meh.
-            sources.add(mMap.webTileSource(OS_API_KEY, OS_IS_PRO, null));
+            sources.add(mMap.webTileSource(getResources().getString(R.string.osmapkey), OS_IS_PRO, null));
             mMap.setTileSources(sources);
 
             // Ok, so it handles clicks. Good start.
