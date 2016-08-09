@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptor;
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptorFactory;
 import uk.co.ordnancesurvey.android.maps.CameraPosition;
@@ -118,9 +119,6 @@ public class MainActivity extends ActionBarActivity {
             // Implemented OnMapClick listener to enable *this* to remain as such.
             mMap.setOnMapClickListener(this);
 
-
-
-
             // Now lets put a marker on there.
 
             // An icon too, because why not?
@@ -161,13 +159,12 @@ public class MainActivity extends ActionBarActivity {
                 Gson gson = new Gson();
                 ArrayList<CircuitItem> circuitsArr = gson.fromJson(output.toString(), new TypeToken<List<CircuitItem>>(){}.getType());
 
-                int i = 0;
-                for (CircuitItem ci : circuitsArr) {
-
-                    mMap.addMarker(new MarkerOptions().gridPoint(new GridPoint(ci.getLat(),ci.getLon())).snippet(ci.getName()).icon(icon));
-
-                    i++;
-                }
+                // Getting Rxey
+                Observable<CircuitItem> numbers = Observable.from(circuitsArr);
+                numbers.subscribe(ci -> mMap.addMarker(
+                        new MarkerOptions()
+                                .gridPoint(new GridPoint(ci.getLat(),ci.getLon()))
+                                .snippet(ci.getName()).icon(icon)));
             }
             catch (IOException e) {
                 //display an error toast message
