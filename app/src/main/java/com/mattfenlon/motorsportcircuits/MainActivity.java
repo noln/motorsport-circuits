@@ -122,14 +122,20 @@ public class MainActivity extends ActionBarActivity {
             // Now lets put a marker on there.
 
             // An icon too, because why not?
-            BitmapDrawable lid = new BitmapDrawable(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.lid), 64, 64, true));
+            BitmapDrawable lid = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(
+                    BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher),
+                    128,
+                    128,
+                    true)
+            );
+
             BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(lid.getBitmap());
 
             // Silverstone on its own.
 
             // Setting up a grid point to try it out.
-            Double eastings = new Double(467467);
-            Double northings = new Double(242706);
+            Double eastings = 467467d;
+            Double northings = 242706d;
 
             // It looks like they've got their own proprietary Point class called GridPoint.
             GridPoint gp = new GridPoint(eastings, northings);
