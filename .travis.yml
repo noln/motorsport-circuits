@@ -8,8 +8,8 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-21.1.2
-    - android-21
+    - build-tools-24.0.1
+    - android-24
 
 before_script:
   # Create and start emulator
@@ -19,3 +19,4 @@ before_script:
   - adb shell input keyevent 82 &
 
 script: ./gradlew connectedAndroidTest
+
