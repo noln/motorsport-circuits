@@ -110,7 +110,7 @@ public class MainActivity extends ActionBarActivity {
       ArrayList<OSTileSource> sources = new ArrayList<OSTileSource>();
 
       // This bit looks to be making sure that they don't give you nice things if you're not
-      // paying for it... Even though I'm prettu sure that I am already, being a British
+      // paying for it... Even though I'm pretty sure that I am already, being a British
       // taxpayer and all. Meh.
       sources.add(mMap.webTileSource(getResources().getString(R.string.osmapkey), OS_IS_PRO, null));
       mMap.setTileSources(sources);
