@@ -26,10 +26,12 @@ android {
 }
 
 dependencies {
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.0.2'
     compile files('libs/osmapandroid-1.0.6.jar')
+
+    compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.google.code.gson:gson:2.5'
-    compile 'io.reactivex:rxjava:1.1.8'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'io.reactivex:rxjava:1.2.7'
 }
