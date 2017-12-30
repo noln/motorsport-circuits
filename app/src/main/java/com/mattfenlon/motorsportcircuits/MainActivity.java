@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,18 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mattfenlon.motorsportcircuits.POJO.CircuitItem;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
 import rx.Observable;
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptor;
 import uk.co.ordnancesurvey.android.maps.BitmapDescriptorFactory;
@@ -37,7 +34,7 @@ import uk.co.ordnancesurvey.android.maps.OSMap;
 import uk.co.ordnancesurvey.android.maps.OSTileSource;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +43,8 @@ public class MainActivity extends ActionBarActivity {
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
       getSupportFragmentManager().beginTransaction()
-              .add(R.id.container, new PlaceholderFragment())
-              .commit();
+          .add(R.id.container, new PlaceholderFragment())
+          .commit();
     }
   }
 
@@ -94,7 +91,8 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+        Bundle savedInstanceState)
+    {
 
       View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
@@ -123,10 +121,10 @@ public class MainActivity extends ActionBarActivity {
 
       // An icon too, because why not?
       BitmapDrawable lid = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(
-              BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher),
-              128,
-              128,
-              true)
+          BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher),
+          128,
+          128,
+          true)
       );
 
       BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(lid.getBitmap());
@@ -144,9 +142,9 @@ public class MainActivity extends ActionBarActivity {
       String locationMessage = "Silverstone innit!";
 
       mMap.addMarker(new MarkerOptions()
-              .gridPoint(gp)
-              .snippet(locationMessage)
-              .icon(icon));
+          .gridPoint(gp)
+          .snippet(locationMessage)
+          .icon(icon));
 
       try {
 
@@ -170,9 +168,9 @@ public class MainActivity extends ActionBarActivity {
         // Getting Rxey
         Observable<CircuitItem> numbers = Observable.from(circuitsArr);
         numbers.subscribe(ci -> mMap.addMarker(
-                new MarkerOptions()
-                        .gridPoint(new GridPoint(ci.getLat(), ci.getLon()))
-                        .snippet(ci.getName()).icon(icon)));
+            new MarkerOptions()
+                .gridPoint(new GridPoint(ci.getLat(), ci.getLon()))
+                .snippet(ci.getName()).icon(icon)));
       }
       catch (IOException e) {
         //display an error toast message
@@ -194,7 +192,6 @@ public class MainActivity extends ActionBarActivity {
     public boolean onMapClick(GridPoint gridPoint) {
 
       Log.v(TAG, "Tapped the Map: X: " + Double.toString(gridPoint.x) + ", Y: " + Double.toString(gridPoint.y));
-
 
       return false;
     }
